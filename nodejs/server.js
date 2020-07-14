@@ -6,6 +6,7 @@ const blog = require('./blog');
 const seo = require('./seo');
 const menu = require('./menu');
 const tdk = require('./tdk');
+const github = require('./github');
 const {auth} = require('./auth');
 
 const app = new Koa();
@@ -82,6 +83,12 @@ router.post('/blog/edit', async (ctx, next) => {
   ctx.response.body = res;
 });
 
+router.post('/blog/removeById', async (ctx, next) => {
+  const res = await blog.removeById(ctx);
+  ctx.response.type = 'application/json';
+  ctx.response.body = res;
+});
+
 router.get('/seo/findByPage', async (ctx, next) => {
   const res = await seo.findByPage(ctx);
   ctx.response.type = 'application/json';
@@ -144,6 +151,12 @@ router.post('/tdk/add', async (ctx, next) => {
 
 router.post('/tdk/upd', async (ctx, next) => {
   const res = await tdk.upd(ctx);
+  ctx.response.type = 'application/json';
+  ctx.response.body = res;
+});
+
+router.post('/github/run', async (ctx, next) => {
+  const res = await github.run();
   ctx.response.type = 'application/json';
   ctx.response.body = res;
 });

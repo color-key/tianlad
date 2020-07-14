@@ -1,15 +1,15 @@
 const { Octokit } = require("@octokit/core");
-const octokit = new Octokit({ auth: `7fb0bf60deb24f4ac351c17345dc9bdab9e0f976` });
+const octokit = new Octokit({ auth: `607c44573836d390ba22b42ab6bcf9e229156900` });
 
 const baseOption = {
   owner: 'color-key',
-  repo: 'tianlad',
-  branch: 'production',
+  repo: 'tianlad'
 }
 
 const findLatestRun = async () => {
   const response = await octokit.request("GET /repos/{owner}/{repo}/actions/runs", {
     ...baseOption,
+    branch: 'web',
     status: 'success',
     per_page: 1,
     page: 1,
@@ -28,6 +28,7 @@ const findWorkflow = async () => {
     per_page: 2,
     page: 1,
   })
+  console.log(response);
   if(response.status === 200){
     const filterWorkflows = response.data.workflows.filter((item) => item.name === 'Manually triggered workflow');
     const workflow = filterWorkflows[0] || null;
@@ -51,12 +52,14 @@ const rerun = async () => {
 const run = async () => {
   const workflow = await findWorkflow();
   if(workflow){
-    await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+    const res = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
       ...baseOption,
       workflow_id: workflow.id,
       ref: 'web'
     })
+    return res;
   }
+  return workflow;
 }
 
 module.exports = {

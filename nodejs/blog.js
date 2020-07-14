@@ -36,16 +36,17 @@ const findByPage = async (ctx) => {
   const content = getQueryString(ctx.request, 'content') || '';
   const pageNum = getQueryString(ctx.request, 'pageNum') || 0;
   const pageSize = getQueryString(ctx.request, 'pageSize') || 10;
-  let queryDataStr = '';
-  queryDataStr += ' title like "%'+title+'%"';
+  let queryDataStr = 'status="ENABLE" and (';
+  queryDataStr += 'title like "%'+title+'%"';
   queryDataStr += ' or';
   queryDataStr += ' keywords like "%'+keywords+'%"';
   queryDataStr += ' or';
   queryDataStr += ' description like "%'+description+'%"';
   queryDataStr += ' or';
-  queryDataStr += ' content like "%'+content+'%"';
+  queryDataStr += ' content like "%'+content+'%")';
+  let orderQueryStr = 'order by createTime DESC';
   let pageQueryStr = ' limit '+(pageNum*pageSize)+','+pageSize+';'
-  const sql = 'SELECT * FROM '+mysqlTable+' WHERE'+queryDataStr+pageQueryStr;
+  const sql = 'SELECT * FROM '+mysqlTable+' WHERE 1=1 and ' + queryDataStr + orderQueryStr + pageQueryStr;
   const args = [];
   const res = await query(sql, args);
   if(res.success){
@@ -54,7 +55,7 @@ const findByPage = async (ctx) => {
       item.updateTime = moment(item.updateTime).format('YYYY/MM/DD HH:mm');
     })
   }
-  const findCountRes = await findCount(queryDataStr);
+  const findCountRes = await findCount(queryDataStr + orderQueryStr);
   if(findCountRes.success && findCountRes.result[0]){
     res.count = findCountRes.result[0].total;
   }else{
@@ -63,8 +64,8 @@ const findByPage = async (ctx) => {
   return res;
 }
 
-const findCount = async (queryDataStr) => {
-  const sql = 'SELECT COUNT(*) as total FROM '+mysqlTable + (queryDataStr?(' WHERE'+queryDataStr):'');
+const findCount = async (queryDataStr='status="ENABLE"') => {
+  const sql = 'SELECT COUNT(*) as total FROM '+mysqlTable + ' WHERE 1=1 and '+queryDataStr;
   const args = [];
   const res = await query(sql, args);
   return res;
@@ -77,11 +78,19 @@ const findIds = async () => {
   return res;
 }
 
+const removeById = async (ctx) => {
+  const data = ctx.request.body;
+  const sql = "UPDATE "+mysqlTable+" SET status='DISABLE' WHERE id='"+data.id+"'";
+  const res = await query(sql);
+  return res;
+}
+
 module.exports = {
   add,
   edit,
   findByPage,
   findById,
   findCount,
-  findIds
+  findIds,
+  removeById
 }

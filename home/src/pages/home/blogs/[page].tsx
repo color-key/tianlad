@@ -4,6 +4,7 @@ import fetch from 'node-fetch';
 import Blogs from '@/app/blogs';
 import {BlogType} from '@/app/blog';
 import Head from 'next/head';
+import Layout from '@/app/layout';
 const pageSize = 10;
 
 const findCount = async () => {
@@ -67,7 +68,9 @@ export default (props: any) => {
           })
         }
       </Head>
-      <Blogs {...props}/>
+      <Layout>
+        <Blogs {...props}/>
+      </Layout>
     </div>
   )
 }
