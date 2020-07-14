@@ -1,7 +1,7 @@
 [
   {
     "path": "api",
-    "target": "https://ceshi3216.tianlad.com/api/",
+    "target": "http://ceshi3216.tianlad.com/api/",
     "changeOrigin": true,
     "secure": false,
     "cookiePathRewrite": "/"

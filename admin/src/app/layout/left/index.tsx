@@ -64,6 +64,10 @@ const navData = [{
   icon: ListAltIcon,
   text: 'TDK管理',
   path: '/tdk'
+},{
+  icon: ListAltIcon,
+  text: '部署',
+  path: '/deploy'
 }]
 
 export default () => {

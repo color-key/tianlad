@@ -12,11 +12,14 @@ import Collapse from '@material-ui/core/Collapse';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 // import FindInPageIcon from '@material-ui/icons/FindInPage';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import EditIcon from '@material-ui/icons/Edit';
-import {getJson} from '@fay-react/lib/fetch';
+import DeleteIcon from '@material-ui/icons/Delete';
+import {getJson, postJson} from '@fay-react/lib/fetch';
 import {BASE_URL, PATH_PREFIX} from '@/env';
 import {BlogType, SearchStateType} from './index';
 
@@ -26,11 +29,12 @@ const useRowStyles = makeStyles({
   },
 });
 
-function Row(props: { row: BlogType }) {
+function Row(props: { row: BlogType, onRemove: any }) {
   const { row } = props;
   const classes = useRowStyles();
   const initOpenState = {desc: false};
   const [open, setOpen] = React.useState(initOpenState);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   // const handleLook = React.useCallback((id: number) => {
   //   window.open(PATH_PREFIX+'/blog/'+id);
@@ -40,6 +44,14 @@ function Row(props: { row: BlogType }) {
     window.open(PATH_PREFIX+'/blog/edit?id='+id);
   }, []);
 
+  const handleRemoveClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleRemoveClose = () => {
+    setAnchorEl(null);
+  };
+  
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
@@ -70,6 +82,18 @@ function Row(props: { row: BlogType }) {
           <IconButton size="small" onClick={() => handleEdit(row.id)}>
             <EditIcon />
           </IconButton>
+          <IconButton size="small" onClick={handleRemoveClick}>
+            <DeleteIcon />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleRemoveClose}
+          >
+            <MenuItem onClick={() => props.onRemove(row.id)}>确定</MenuItem>
+            <MenuItem onClick={handleRemoveClose}>取消</MenuItem>
+          </Menu>
         </TableCell>
       </TableRow>
       <TableRow>
@@ -129,6 +153,16 @@ export default ({search}: Props) => {
     })
   }
 
+  const handleRemove = React.useCallback((id: number) => {
+    postJson({path: BASE_URL + '/blog/removeById', data: {id}}).then(res => {
+      if(res.success){
+        getData();
+      }else{
+        alert('删除失败');
+      }
+    })
+  }, []);
+
   React.useEffect(() => {
     getData();
   }, [JSON.stringify(search), page, rowsPerPage]);
@@ -153,7 +187,7 @@ export default ({search}: Props) => {
           <TableBody>
             {
               state.data.map((row: BlogType) => (
-                <Row key={row.id} row={row} />
+                <Row key={row.id} row={row} onRemove={handleRemove}/>
               ))
             }
           </TableBody>
