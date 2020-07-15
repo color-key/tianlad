@@ -1,5 +1,5 @@
 const { Octokit } = require("@octokit/core");
-const octokit = new Octokit({ auth: `607c44573836d390ba22b42ab6bcf9e229156900` });
+const octokit = new Octokit({ auth: `6e2758f77331492b30c11d127c281f80db948cf6` });
 
 const baseOption = {
   owner: 'color-key',
@@ -61,6 +61,22 @@ const run = async () => {
   }
   return workflow;
 }
+
+const test = async () => {
+  // const workflow = await findWorkflow();
+  // console.log(workflow);
+  // if(workflow){
+    const res = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}', {
+      ...baseOption,
+      workflow_id: 1875805,
+    })
+    console.log(res);
+    return res;
+  // }
+  // return workflow;
+}
+
+test();
 
 module.exports = {
   run,
