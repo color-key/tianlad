@@ -1,6 +1,6 @@
 const {query} = require('./mysql');
 const {getQueryString} = require('./lib/query');
-const moment = require('moment');
+const {datetimeFormat} = require('./lib/date-format');
 const shortid = require('shortid');
 const crypto = require('crypto');
 
@@ -46,7 +46,7 @@ const findManager = async (ctx) => {
   const res = await query(sql, args);
   if(res.success){
     res.result.map((item) => {
-      item.creation_datetime = moment(item.creation_datetime).format('YYYY/MM/DD HH:mm');
+      item.creation_datetime = datetimeFormat(item.creation_datetime);
     })
   }
   return res;

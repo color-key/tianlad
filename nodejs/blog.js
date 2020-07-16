@@ -1,6 +1,6 @@
 const {query} = require('./mysql');
 const {getQueryString} = require('./lib/query');
-const moment = require('moment');
+const {datetimeFormat} = require('./lib/date-format');
 
 const mysqlTable = "tianlad_blog";
 
@@ -51,8 +51,8 @@ const findByPage = async (ctx) => {
   const res = await query(sql, args);
   if(res.success){
     res.result.map((item) => {
-      item.createTime = moment(item.createTime).format('YYYY/MM/DD HH:mm');
-      item.updateTime = moment(item.updateTime).format('YYYY/MM/DD HH:mm');
+      item.createTime = datetimeFormat(item.createTime);
+      item.updateTime = datetimeFormat(item.updateTime);
     })
   }
   const findCountRes = await findCount(queryDataStr + orderQueryStr);
