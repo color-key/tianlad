@@ -1,6 +1,6 @@
 const {query} = require('./mysql');
 const {getQueryString} = require('./lib/query');
-const moment = require('moment');
+const {datetimeFormat} = require('./lib/date-format');
 
 const mysqlTable = "tianlad_tdk";
 
@@ -43,8 +43,8 @@ const findByPage = async (ctx) => {
           item.parentName = findParentRes.result[0].name;
         }
       }
-      item.createTime = moment(item.createTime).format('YYYY/MM/DD HH:mm');
-      item.updateTime = moment(item.updateTime).format('YYYY/MM/DD HH:mm');
+      item.createTime = datetimeFormat(item.createTime);
+      item.updateTime = datetimeFormat(item.updateTime);
     })
   }
   return res;
