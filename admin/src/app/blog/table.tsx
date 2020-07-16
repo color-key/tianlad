@@ -21,6 +21,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {getJson, postJson} from '@fay-react/lib/fetch';
 import {BASE_URL, PATH_PREFIX} from '@/env';
+import {datetimeFormat} from '@/lib/date-format';
 import {BlogType, SearchStateType} from './index';
 
 const useRowStyles = makeStyles({
@@ -71,8 +72,8 @@ function Row(props: { row: BlogType, onRemove: any }) {
             <img src={row.thumbnail} style={{width: "50px", height: '50px'}}/>
           }
         </TableCell>
-        <TableCell>{row.createTime}</TableCell>
-        <TableCell>{row.updateTime}</TableCell>
+        <TableCell>{datetimeFormat(row.createTime)}</TableCell>
+        <TableCell>{datetimeFormat(row.updateTime)}</TableCell>
         {/* <TableCell align="center">
           <IconButton size="small" onClick={() => handleLook(row.id)}>
             <FindInPageIcon />

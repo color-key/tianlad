@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import {getJson} from '@fay-react/lib/fetch';
 import {BASE_URL} from '@/env';
 import {ManagerType, SearchStateType} from './index';
+import {datetimeFormat} from '@/lib/date-format';
 
 const useRowStyles = makeStyles({
   root: {
@@ -28,7 +29,7 @@ function Row(props: { row: ManagerType}) {
         <TableCell component="th" scope="row">
           {row.username}
         </TableCell>
-        <TableCell>{row.creation_datetime}</TableCell>
+        <TableCell>{datetimeFormat(row.creation_datetime)}</TableCell>
       </TableRow>
     </React.Fragment>
   );

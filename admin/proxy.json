@@ -1,7 +1,7 @@
 [
   {
     "path": "api",
-    "target": "https://huashi.faycz.com/",
+    "target": "http://www.tianlad.com/api",
     "changeOrigin": true,
     "secure": false,
     "cookiePathRewrite": "/"
