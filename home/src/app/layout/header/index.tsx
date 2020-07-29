@@ -1,7 +1,26 @@
 import React from 'react';
 import {PATH_PREFIX} from '@/env';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import PhoneForwardedIcon from '@material-ui/icons/PhoneForwarded';
+
+const useStyles = makeStyles(() => ({
+  phone: {
+    display: 'flex',
+    position: 'absolute',
+    right: '200px',
+    top: '10px',
+    color: '#FFFFFF',
+  },
+  phoneIcon: {
+    marginRight: '16px',
+    fontSize: '28px',
+    marginTop: '8px',
+  }
+}));
 
 export default () => {
+  const classes = useStyles();
 
   React.useEffect(() => {
     const script = document.createElement('script');
@@ -32,6 +51,15 @@ export default () => {
                 <a href="/home/about">关于我们</a>
               </li>
             </ul>
+          </div>
+          <div className={classes.phone}>
+            <div>
+              <PhoneForwardedIcon className={classes.phoneIcon}/>
+            </div>
+            <div>
+              <Typography>全国服务热线</Typography>
+              <Typography>400-780-6980</Typography>
+            </div>
           </div>
         </div>
       </div>
