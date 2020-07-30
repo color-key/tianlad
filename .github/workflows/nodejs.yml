@@ -20,7 +20,7 @@ jobs:
           SOURCE: 'nodejs/'
           REMOTE_HOST: ${{ secrets.SERVER_HOST_NAME }}
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
-          TARGET: ${{ secrets.SERVER_NODEJS_TARGET }}
+          TARGET: ${{ secrets.SERVER_SERVICE_TARGET }}
 
       - name: ssh-agent
         uses: webfactory/ssh-agent@v0.1.1

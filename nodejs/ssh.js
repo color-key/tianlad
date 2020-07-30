@@ -1,14 +1,18 @@
-var exec = require('child_process').exec; 
+const {execSync} = require('child_process'); 
 
-var cmdStr = 'cd ../home && npm run export';
+const cmdStr = 'cd ./public/home && npm run export-cb';
 
-exec(cmdStr, function(err, stdout, stderr){
-
-  if(err) {
-    console.log('build error:' + stderr);
-  } else {
-    console.log(stdout);
-    // var data = JSON.parse(stdout);
-    // console.log(data);
+const reBuildHome = () => {
+  try {
+    const res = execSync(cmdStr);
+    console.log(res);
+    return {success: true};
+  } catch (error) {
+    console.log('build error:' + error);
+    return {success: false};
   }
-});
+}
+
+module.exports = {
+  reBuildHome,
+}

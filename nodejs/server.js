@@ -6,7 +6,7 @@ const blog = require('./blog');
 const seo = require('./seo');
 const menu = require('./menu');
 const tdk = require('./tdk');
-const github = require('./github');
+const ssh = require('./ssh');
 const {auth} = require('./auth');
 
 const app = new Koa();
@@ -155,8 +155,8 @@ router.post('/tdk/upd', async (ctx, next) => {
   ctx.response.body = res;
 });
 
-router.post('/github/run', async (ctx, next) => {
-  const res = await github.run();
+router.post('/reBuildHome', async (ctx, next) => {
+  const res = ssh.reBuildHome();
   ctx.response.type = 'application/json';
   ctx.response.body = res;
 });
