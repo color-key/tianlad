@@ -20,7 +20,7 @@ jobs:
           SOURCE: 'nodejs/'
           REMOTE_HOST: ${{ secrets.SERVER_HOST_NAME }}
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
-          TARGET: ${{ secrets.SERVER_NODEJS_TARGET }}
+          TARGET: ${{ secrets.SERVER_SERVICE_TARGET }}
 
       - name: ssh-agent
         uses: webfactory/ssh-agent@v0.1.1
@@ -33,7 +33,7 @@ jobs:
         run: ssh-keyscan ${{ secrets.SERVER_HOST_NAME }} >> ~/.ssh/known_hosts
 
       - name: Run SSH Command To build nodejs server
-        run: ssh root@${{ secrets.SERVER_HOST_NAME }} "(docker stop tianlad-nodejs || true) && (docker rm tianlad-nodejs || true) && (docker rmi tianlad-nodejs || true) && cd /fay/service/tianlad/nodejs/ && docker build -t tianlad-nodejs . && docker run --restart=always -d -p 3003:3000 --name tianlad-nodejs tianlad-nodejs"
+        run: ssh root@${{ secrets.SERVER_HOST_NAME }} "(docker stop tianlad-nodejs || true) && (docker rm tianlad-nodejs || true) && (docker rmi tianlad-nodejs || true) && cd /fay/service/tianlad/nodejs/ && docker build -t tianlad-nodejs . && docker run --restart=always -d -p 3003:3000 -v /fay/service/tianlad/public:/app/public --name tianlad-nodejs tianlad-nodejs"
       
 
   

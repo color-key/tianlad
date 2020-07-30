@@ -10,6 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import {getJson} from '@fay-react/lib/fetch';
 import {BASE_URL} from '@/env';
+import {datetimeFormat} from '@/lib/date-format';
 import {DemandType, SearchStateType} from './index';
 
 const useRowStyles = makeStyles({
@@ -30,7 +31,7 @@ function Row(props: { row: DemandType}) {
         </TableCell>
         <TableCell>{row.contactPhone}</TableCell>
         <TableCell>{row.website}</TableCell>
-        <TableCell>{row.createTime}</TableCell>
+        <TableCell>{datetimeFormat(row.createTime)}</TableCell>
       </TableRow>
     </React.Fragment>
   );
