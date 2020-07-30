@@ -3,8 +3,8 @@ let reBuilding = false;
 let reBuildCode = 0;
 let reBuildData = '';
 
-// const cmdStr = 'cd ./public/home && npm install --registry=https://registry.npm.taobao.org/ && npm run export-cb';
-const cmdStr = 'cd ../home && npm install && npm run export-cb';
+const cmdStr = 'cd ./public/home && npm install --registry=https://registry.npm.taobao.org/ && npm run export-cb';
+// const cmdStr = 'cd ../home && npm install && npm run export-cb';
 
 const reBuildHome = () => {
   console.log(reBuilding);
