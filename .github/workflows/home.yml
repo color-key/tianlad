@@ -29,13 +29,23 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.2
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          # ARGS: '-rltgoDzvO --delete'
+          SOURCE: 'dist/index.html'
+          REMOTE_HOST: ${{ secrets.SERVER_HOST_NAME }}
+          REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
+          TARGET: ${{ secrets.SERVER_SERVICE_TARGET }}/public/dist
+
+      - name: Deploy home to Server
+        uses: easingthemes/ssh-deploy@v2.1.2
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: '-rltgoDzvO --delete'
           SOURCE: 'home/'
           REMOTE_HOST: ${{ secrets.SERVER_HOST_NAME }}
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
           TARGET: ${{ secrets.SERVER_SERVICE_TARGET }}/public/home
 
-      - name: Deploy home to Server
+      - name: Deploy home dist to Server
         uses: easingthemes/ssh-deploy@v2.1.2
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
