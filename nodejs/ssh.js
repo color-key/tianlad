@@ -23,7 +23,7 @@ const reBuildHome = () => {
   
     reBuildHomeSpawn.stderr.on('data', (data) => {
       console.error(`stderr: ${data}`);
-      resolve({success: false, error: data});
+      resolve({success: false, error: data.toString()});
     });
     
     reBuildHomeSpawn.on('close', (code) => {
