@@ -12,28 +12,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install Dependencies and Build Project
+        run: |
+          cd home
+          npm install --registry=https://registry.npm.taobao.org/
+          npm run export
+          cd ..
+        env:
+          CI: true
+
       - name: Deploy home to Server
         uses: easingthemes/ssh-deploy@v2.1.2
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: '-rltgoDzvO --delete'
-          SOURCE: 'home/'
+          SOURCE: 'home'
           REMOTE_HOST: ${{ secrets.SERVER_HOST_NAME }}
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
-          TARGET: ${{ secrets.SERVER_HOME_TARGET }}
+          TARGET: ${{ secrets.SERVER_SERVICE_TARGET }}/public
 
-      - name: ssh-agent
-        uses: webfactory/ssh-agent@v0.1.1
-        with:
-          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+      - name: Deploy home to Server
+        uses: easingthemes/ssh-deploy@v2.1.2
         env:
-          SERVER_HOST_NAME: ${{ secrets.SERVER_HOST_NAME }}
-
-      - name: Setup knownhosts
-        run: ssh-keyscan ${{ secrets.SERVER_HOST_NAME }} >> ~/.ssh/known_hosts
-
-      - name: Run SSH Command To build pc server
-        run: ssh root@${{ secrets.SERVER_HOST_NAME }} "cd ${{ secrets.SERVER_HOME_TARGET }} && npm run export-cb"
-      
-
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: 'dist/home'
+          REMOTE_HOST: ${{ secrets.SERVER_HOST_NAME }}
+          REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
+          TARGET: ${{ secrets.SERVER_SERVICE_TARGET }}/public/dist
   

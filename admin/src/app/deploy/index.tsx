@@ -16,7 +16,7 @@ export default () => {
 
   const handleDeploy = () => {
     setLoading(true);
-    postJson({path: BASE_URL+'/github/run'}).then(res => {
+    postJson({path: BASE_URL+'/reBuildHome'}).then(res => {
       console.log(res);
     })
   }
