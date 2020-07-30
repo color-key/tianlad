@@ -1,6 +1,7 @@
 const {spawn} = require('child_process');
 let reBuilding = false;
 let reBuildCode = 0;
+let reBuildData = '';
 
 // const cmdStr = 'cd ./public/home && npm install --registry=https://registry.npm.taobao.org/ && npm run export-cb';
 const cmdStr = 'cd ../home && npm install && npm run export-cb';
@@ -21,10 +22,12 @@ const reBuildHome = () => {
     // })
   }else{
     reBuilding = true;
+    reBuildData = '';
     const reBuildHomeSpawn = spawn(cmdStr, [], {shell: true});
     return new Promise((resolve) => {
       reBuildHomeSpawn.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
+        reBuildData += data.toString();
       });
     
       reBuildHomeSpawn.stderr.on('data', (data) => {
@@ -45,7 +48,7 @@ const reBuildHome = () => {
 }
 
 const getReBuildHomeStatus = () => {
-  return {success: true, reBuilding, reBuildCode};
+  return {success: true, reBuilding, reBuildCode, reBuildData};
 }
 
 module.exports = {
