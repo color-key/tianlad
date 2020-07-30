@@ -156,7 +156,7 @@ router.post('/tdk/upd', async (ctx, next) => {
 });
 
 router.post('/reBuildHome', async (ctx, next) => {
-  const res = ssh.reBuildHome();
+  const res = await ssh.reBuildHome();
   ctx.response.type = 'application/json';
   ctx.response.body = res;
 });
