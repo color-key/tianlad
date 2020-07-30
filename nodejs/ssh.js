@@ -28,9 +28,9 @@ const reBuildHome = () => {
     reBuildHomeSpawn.on('close', (code) => {
       console.log(`子进程退出，退出码 ${code}`);
       if(code !== 0){
-        resolve({success: false, error: '异常退出'});
+        resolve({success: false, code, error: '异常退出'});
       }
-      resolve({success: true});
+      resolve({success: true, code});
     });
   })
 }
