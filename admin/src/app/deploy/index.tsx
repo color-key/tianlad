@@ -65,7 +65,8 @@ export default function DelayingAppearance() {
   return (
     <div className={classes.root}>
       <Typography color='primary' className={classes.title}>
-        为了提高网站在每个地区的访问速度，需手动点击部署操作
+        为了提高网站在每个地区的访问速度，需手动点击部署操作<br/>
+        这个过程大概需要35秒-2分钟
       </Typography>
       {
         data &&
