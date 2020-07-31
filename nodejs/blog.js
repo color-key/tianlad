@@ -53,7 +53,9 @@ const findByPage = async (ctx) => {
   queryDataStr += ' keywords like "%'+keywords+'%"';
   queryDataStr += ' or';
   queryDataStr += ' description like "%'+description+'%"';
-  let orderQueryStr = 'order by createTime DESC';
+  queryDataStr += ' or';
+  queryDataStr += ' content like "%'+content+'%")';
+  let orderQueryStr = ' order by createTime DESC';
   let pageQueryStr = ' limit '+(pageNum*pageSize)+','+pageSize+';'
   const sql = 'SELECT * FROM '+mysqlTable+' WHERE 1=1 and ' + queryDataStr + orderQueryStr + pageQueryStr;
   const args = [];
