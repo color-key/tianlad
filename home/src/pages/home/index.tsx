@@ -15,7 +15,9 @@ const css = [
 
 export const getStaticProps = async () => {
   const res = await fetch(SERVER_URL+'/blog/findByPage?pageNum=0&pageSize=3');
+  console.log(res);
   const data = await res.json();
+  console.log(data);;
   const blogs = data.result;
   const tdkRes = await fetch(SERVER_URL+'/tdk/findByPath?path=/');
   const tdkData = await tdkRes.json();

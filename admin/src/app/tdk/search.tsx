@@ -39,7 +39,7 @@ export default ({onSearch}: Props) => {
   }
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root} elevation={0}>
       <Grid container spacing={2}>
         <Grid container item xs={8}>
           <Grid item xs={4}>
