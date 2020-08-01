@@ -21,7 +21,7 @@ interface Props{
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     btn: {
-      color: theme.palette.common.white
+      // color: theme.palette.common.white
     },
     paper: {
       zIndex: 10,
