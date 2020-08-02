@@ -3,13 +3,15 @@ import {makeStyles} from "@material-ui/core/styles";
 import TextField from "@/components/text-field";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import {SearchStateType} from './index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    margin: theme.spacing(2, 0)
+    margin: theme.spacing(2, 0),
+    backgroundColor: theme.palette.background.default
   },
   btn: {
     height: 40,
@@ -40,34 +42,33 @@ export default ({onSearch}: Props) => {
 
   return (
     <Paper className={classes.root} elevation={0}>
-      <Grid container spacing={2}>
-        <Grid container item xs={8}>
-          <Grid item xs={4}>
-            <TextField
-              label="来源"
-              value={state.contactName}
-              onChange={handleChange('contactName')}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <TextField
-              label="联系人手机号"
-              value={state.contactPhone}
-              onChange={handleChange('contactPhone')}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <TextField
-              label="网站"
-              value={state.website}
-              onChange={handleChange('website')}
-            />
-          </Grid>
-        </Grid>
-        <Grid container item xs={4} justify={"center"} alignItems={"center"}>
-          <Button className={classes.btn} variant={"contained"} color={"primary"} onClick={handleSearch}>查询</Button>
-          <Button className={classes.btn} variant={"contained"} onClick={handleReset}>重置</Button>
-        </Grid>
+      <Grid container item alignItems={"center"}>
+        <Box mr={2}>
+          <TextField
+            label="来源"
+            size={"small"}
+            value={state.contactName}
+            onChange={handleChange('contactName')}
+          />
+        </Box>
+        <Box mr={2}>
+          <TextField
+            label="联系人手机号"
+            size={"small"}
+            value={state.contactPhone}
+            onChange={handleChange('contactPhone')}
+          />
+        </Box>
+        <Box mr={2}>
+          <TextField
+            label="网站"
+            size={"small"}
+            value={state.website}
+            onChange={handleChange('website')}
+          />
+        </Box>
+        <Button className={classes.btn} variant={"contained"} color={"primary"} onClick={handleSearch}>查询</Button>
+        <Button className={classes.btn} variant={"contained"} onClick={handleReset}>重置</Button>
       </Grid>
     </Paper>
   )

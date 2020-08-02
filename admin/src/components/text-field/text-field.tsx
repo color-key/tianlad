@@ -12,7 +12,7 @@ const useStyles = makeStyles(() =>
       transform: 'translate(12px, 22px) scale(1)'
     },
     input: {
-      padding: '25px 12px 10px',
+      // padding: '25px 12px 10px',
       "&:-internal-autofill-previewed, &:-internal-autofill-selected": {
         // "-webkit-text-fill-color": "#807c7c",
         "transition": "background-color 5000s ease-out 0.5s"
