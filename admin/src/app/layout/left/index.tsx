@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       zIndex: 1,
       position: 'absolute',
-      backgroundImage: `url("${PATH_PREFIX}/static/bg/sidebar-2.jpg")`,
+      // backgroundImage: `url("${PATH_PREFIX}/static/bg/sidebar-2.jpg")`,
       backgroundSize: 'cover',
       backgroundPosition: 'center center',
       '&:after': {
@@ -147,7 +147,7 @@ export default () => {
           })
         }
       </List>
-      <div className={classes.bg}></div>
+      <div className={classes.bg} style={{backgroundImage: `url("${PATH_PREFIX}/static/bg/sidebar-2.jpg")`}}></div>
     </div>
   )
 }
