@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    color: theme.palette.common.white,
+    // color: theme.palette.common.white,
     // background: theme.palette.primary.dark,
     // boxShadow: '0px 1px 0px 0px rgba(255,255,255,0.24)',
     // padding: '0 32px'

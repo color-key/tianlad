@@ -16,7 +16,7 @@ interface Props{
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.common.white
+      // backgroundColor: theme.palette.common.white
     },
     header: {
       height: 64,
