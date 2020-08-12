@@ -44,7 +44,7 @@ export default ({onSearch}: Props) => {
       <Grid container item alignItems={"center"}>
         <TextField
           label="搜索"
-          size={"small"}
+          
           value={state.searchText}
           onChange={handleChange('contactName')}
         />
