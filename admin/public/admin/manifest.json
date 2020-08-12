@@ -1,7 +1,7 @@
 {
-  "name": "KeyPool",
-  "short_name": "KeyPool",
-  "description": "KeyPool",
+  "name": "Tianlad",
+  "short_name": "Tianlad",
+  "description": "Tianlad",
   "icons": [
     {
       "src": "/admin/static/pwa.png",

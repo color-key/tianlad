@@ -9,7 +9,8 @@ import {SearchStateType} from './index';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    margin: theme.spacing(2, 0)
+    margin: theme.spacing(2, 0),
+    backgroundColor: theme.palette.background.default
   },
   btn: {
     height: 40,
@@ -39,21 +40,16 @@ export default ({onSearch}: Props) => {
   }
 
   return (
-    <Paper className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid container item xs={8}>
-          <Grid item xs={4}>
-            <TextField
-              label="用户名"
-              value={state.username}
-              onChange={handleChange('username')}
-            />
-          </Grid>
-        </Grid>
-        <Grid container item xs={4} justify={"center"} alignItems={"center"}>
-          <Button className={classes.btn} variant={"contained"} color={"primary"} onClick={handleSearch}>查询</Button>
-          <Button className={classes.btn} variant={"contained"} onClick={handleReset}>重置</Button>
-        </Grid>
+    <Paper className={classes.root} elevation={0}>
+      <Grid container item alignItems={"center"}>
+        <TextField
+          size={"small"}
+          label="用户名"
+          value={state.username}
+          onChange={handleChange('username')}
+        />
+        <Button className={classes.btn} variant={"contained"} color={"primary"} onClick={handleSearch}>查询</Button>
+        <Button className={classes.btn} variant={"contained"} onClick={handleReset}>重置</Button>
       </Grid>
     </Paper>
   )
