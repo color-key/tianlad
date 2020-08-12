@@ -6,7 +6,7 @@ export default () => {
     new Swiper('.swiper-container', {
       paginationClickable: true,
       spaceBetween: 30,
-      // autoplay: 2000, //每秒中轮播一次
+      autoplay: 2000, //每秒中轮播一次
       loop: true, //--可以让图片循环轮播
       autoplayDisableOnInteraction: false, //--在点击之后可以继续实现轮播
       pagination: ".swiper-pagination", //--让小圆点显示
