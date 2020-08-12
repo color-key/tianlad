@@ -9,8 +9,8 @@ import React from 'react';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#5D38DB',
-      dark: '#260692',
+      main: '#9c27b0',
+      dark: '#5D38DB',
       light: blue[50],
     },
     secondary: {
@@ -19,19 +19,19 @@ const theme = createMuiTheme({
     common: {
       black: '#131313'
     },
-    background: {
-      default: '#FFFFFF'
-    }
+    // background: {
+    //   default: '#FFFFFF'
+    // }
   },
   spacing: 8,
   overrides: {
     MuiPaper: {
-      elevation1: {
-        boxShadow: '0px 30px 81px #2121211C',
-      },
-      rounded: {
-        borderRadius: '2px'
-      }
+      // elevation1: {
+      //   boxShadow: '0px 30px 81px #2121211C',
+      // },
+      // rounded: {
+      //   // borderRadius: '2px'
+      // }
     },
     MuiSnackbar: {
       anchorOriginTopRight: {
@@ -42,9 +42,16 @@ const theme = createMuiTheme({
       }
     },
     MuiButton: {
-      root: {
-        // textTransform: "inherit",
-        // borderRadius: 24
+      // root: {
+      //   // textTransform: "inherit",
+      //   // borderRadius: 24
+        
+      // },
+      containedPrimary: {
+        '&:hover': {
+          boxShadow: '0 14px 26px -12px rgba(156, 39, 176, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2)',
+          backgroundColor: '#9c27b0',
+        }
       }
     }
   }

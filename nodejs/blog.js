@@ -8,6 +8,9 @@ const mysqlTable = "tianlad_blog";
 
 const add = async (ctx) => {
   const data = ctx.request.body;
+  if(data.content){
+    data.content = Buffer.from(data.content).toString('base64');
+  }
   const sql = 'INSERT INTO '+mysqlTable+' SET ?';
   const args = data;
   const res = await query(sql, args);
@@ -16,6 +19,9 @@ const add = async (ctx) => {
 
 const edit = async (ctx) => {
   const data = ctx.request.body;
+  if(data.content){
+    data.content = Buffer.from(data.content).toString('base64');
+  }
   const sql = "UPDATE "+mysqlTable+" SET title='"+data.title+"', keywords='"+data.keywords+"', description='"+data.description+"', thumbnail='"+data.thumbnail+"', content='"+data.content+"' WHERE id='"+data.id+"'";
   const res = await query(sql);
   return res;
@@ -26,6 +32,11 @@ const findById = async (ctx) => {
   const sql = 'SELECT * FROM '+mysqlTable+' WHERE `id` = ?';
   const args = [id];
   const res = await query(sql, args);
+  if(res.success){
+    res.result.map((item) => {
+      item.content = Buffer.from(item.content, 'base64').toString();
+    })
+  }
   return res;
 }
 
@@ -44,7 +55,7 @@ const findByPage = async (ctx) => {
   queryDataStr += ' description like "%'+description+'%"';
   queryDataStr += ' or';
   queryDataStr += ' content like "%'+content+'%")';
-  let orderQueryStr = 'order by createTime DESC';
+  let orderQueryStr = ' order by createTime DESC';
   let pageQueryStr = ' limit '+(pageNum*pageSize)+','+pageSize+';'
   const sql = 'SELECT * FROM '+mysqlTable+' WHERE 1=1 and ' + queryDataStr + orderQueryStr + pageQueryStr;
   const args = [];
@@ -84,6 +95,20 @@ const removeById = async (ctx) => {
   const res = await query(sql);
   return res;
 }
+
+const transfer = async (id) => {
+  const sql = 'SELECT * FROM '+mysqlTable+' WHERE `id` = ?';
+  const args = [id];
+  const res = await query(sql, args);
+  const data = res.result[0];
+  if(data.content){
+    data.content = Buffer.from(data.content).toString('base64');
+  }
+  const sql1 = "UPDATE "+mysqlTable+" SET title='"+data.title+"', keywords='"+data.keywords+"', description='"+data.description+"', thumbnail='"+data.thumbnail+"', content='"+data.content+"' WHERE id='"+data.id+"'";
+  const res2 = await query(sql1);
+  console.log(res2);
+}
+
 
 module.exports = {
   add,

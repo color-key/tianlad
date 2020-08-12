@@ -10,7 +10,8 @@ import {PATH_PREFIX} from '@/env';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    margin: theme.spacing(2, 0)
+    margin: theme.spacing(2, 0),
+    backgroundColor: theme.palette.background.default
   },
   btn: {
     height: 40,
@@ -44,22 +45,17 @@ export default ({onSearch}: Props) => {
   }
 
   return (
-    <Paper className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid container item xs={8}>
-          <Grid item xs={4}>
-            <TextField
-              label="搜索"
-              value={state.searchKeywords}
-              onChange={handleChange('orderNo')}
-            />
-          </Grid>
-        </Grid>
-        <Grid container item xs={4} justify={"center"} alignItems={"center"}>
-          <Button className={classes.btn} variant={"contained"} color={"primary"} onClick={handleSearch}>查询</Button>
-          <Button className={classes.btn} variant={"contained"} onClick={handleEdit}>添加</Button>
-          <Button className={classes.btn} variant={"contained"} onClick={handleReset}>重置</Button>
-        </Grid>
+    <Paper className={classes.root} elevation={0}>
+      <Grid container item alignItems={"center"}>
+        <TextField
+          label="搜索"
+          size={"small"}
+          value={state.searchKeywords}
+          onChange={handleChange('orderNo')}
+        />
+        <Button className={classes.btn} variant={"contained"} color={"primary"} onClick={handleSearch}>查询</Button>
+        <Button className={classes.btn} variant={"contained"} onClick={handleEdit}>添加</Button>
+        <Button className={classes.btn} variant={"contained"} onClick={handleReset}>重置</Button>
       </Grid>
     </Paper>
   )
