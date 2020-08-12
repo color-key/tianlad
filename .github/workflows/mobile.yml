@@ -1,9 +1,9 @@
-name: web home ci
+name: web mobile ci
 
 on:
   push:
     branches:
-      - home
+      - mobile
 
 jobs:
   build-and-deploy-to-server:
@@ -25,7 +25,7 @@ jobs:
       - name: Run SSH Command To init directory
         run: ssh root@${{ secrets.SERVER_HOST_NAME }} "(mkdir ${{ secrets.SERVER_SERVICE_TARGET }}/public || true) && (mkdir ${{ secrets.SERVER_SERVICE_TARGET }}/public/dist || true)"
 
-      - name: Deploy home to Server
+      - name: Deploy mobile to Server
         uses: easingthemes/ssh-deploy@v2.1.2
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
