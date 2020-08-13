@@ -12,6 +12,7 @@ export default ({children}: any) => {
     'demand': <Layout>{children}</Layout>,
     'deploy': <Layout>{children}</Layout>,
     'tdk': <Layout>{children}</Layout>,
+    'banner': <Layout>{children}</Layout>,
     '': <Layout>{children}</Layout>,
     'login': children,
     'coming-soon': children,

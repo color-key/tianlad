@@ -16,7 +16,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 import {PATH_PREFIX} from '@/env';
-import UpdateIcon from '@material-ui/icons/Update';
+// import UpdateIcon from '@material-ui/icons/Update';
 import TitleIcon from '@material-ui/icons/Title';
 import BookIcon from '@material-ui/icons/Book';
 
@@ -105,16 +105,20 @@ const navData = [{
   path: '/blog'
 },{
   icon: ListAltIcon,
-  text: 'SEO需求',
+  text: '表单获取',
   path: '/demand'
 },{
   icon: TitleIcon,
   text: 'TDK管理',
   path: '/tdk'
 },{
-  icon: UpdateIcon,
-  text: '部署',
-  path: '/deploy'
+  icon: TitleIcon,
+  text: 'Banner管理',
+  path: '/banner'
+// },{
+//   icon: UpdateIcon,
+//   text: '部署',
+//   path: '/deploy'
 }]
 
 export default () => {

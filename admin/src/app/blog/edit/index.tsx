@@ -54,6 +54,7 @@ export default () => {
       postJson({path: BASE_URL+'/blog/edit', data}).then((res: any) => {
         if(res.success){
           setSuccess(true);
+          postJson({path: BASE_URL+'/reBuildHome'});
         }else{
           setError(true);
         }
@@ -64,6 +65,7 @@ export default () => {
         if(res.success){
           setSuccess(true);
           setStorageId(res.result.insertId);
+          postJson({path: BASE_URL+'/reBuildHome'});
         }else{
           setError(true);
         }
