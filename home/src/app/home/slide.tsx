@@ -1,11 +1,28 @@
 import React from 'react';
+import {getJson} from '@fay-react/lib/fetch';
+import {BASE_URL} from '@/env';
 
 export default () => {
+
+  const [banners, setBanners] = React.useState([]);
+
+  const getData = () => {
+    getJson({path: BASE_URL+'/banner/findById', data: {id: 1}}).then(res => {
+      if(res.success && res.result[0]){
+        setBanners(res.result[0].banner.split(','));
+      }
+    })
+  }
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div className="index-fullSlide fullSlide">
       <div className="bd">
         <ul>
-          <li style={{background:'#3C9BFB url(/home/static/images/home/banner/3.jpg) center no-repeat'}} className="banner_1">
+          <li style={{background:`#3C9BFB url(${banners[0]}) center no-repeat`}} className="banner_1">
             <div className="index-slide-content">
               <h2>SEO服务-按结果付费</h2>
               <p>千余家用户经验，五年诚信品牌实力见证，站在客户角度，一对一服务，</p>
@@ -13,7 +30,7 @@ export default () => {
               <a href="/home/service/seo" target="_blank">了解详情</a>
             </div>
           </li>
-          <li style={{background:'#3C9BFB url(/home/static/images/home/banner/1.jpg) center no-repeat'}} className="banner_2">
+          <li style={{background:`#3C9BFB url(${banners[1]}) center no-repeat`}} className="banner_2">
             <div className="index-slide-content">
               <h2>新媒体运营</h2>
               <p>知名上海新媒体运营, 5年为多家500强企业在提供新媒体运营服务，</p>
@@ -21,7 +38,7 @@ export default () => {
               <a href="/home/solution" target="_blank">了解详情</a>
             </div>
           </li>
-          <li style={{background:'#3C9BFB url(/home/static/images/home/banner/2.jpg) center no-repeat'}}>
+          <li style={{background:`#3C9BFB url(${banners[2]}) center no-repeat`}}>
             <div className="index-slide-content">
               <h2>网站建设</h2>
               <p>用心做好每一个网站，原创定制网站建设和营销，</p>
