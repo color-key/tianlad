@@ -2,6 +2,7 @@ const {spawn} = require('child_process');
 let reBuilding = false;
 let reBuildCode = 0;
 let reBuildData = '';
+let waitReBuild = false;
 
 const cmdStr = 'cd ./public/home && npm install --registry=https://registry.npm.taobao.org/ && npm run export-cb && cd ../m && npm install --registry=https://registry.npm.taobao.org/ && npm run export-cb';
 // const cmdStr = 'cd ../home && npm install && npm run export-cb';
@@ -20,7 +21,19 @@ const reBuildHome = () => {
     //     }
     //   }, 5000);
     // })
+    if(!waitReBuild){
+      waitReBuild = true;
+      const interval = setInterval(() => {
+        if(waitReBuild){
+          console.log(waitReBuild);
+          reBuildHome();
+        }else{
+          clearInterval(interval);
+        }
+      }, 1000);
+    }
   }else{
+    waitReBuild = false;
     reBuilding = true;
     reBuildData = '';
     const reBuildHomeSpawn = spawn(cmdStr, [], {shell: true});
