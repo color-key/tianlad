@@ -6,6 +6,7 @@ const blog = require('./blog');
 const seo = require('./seo');
 const menu = require('./menu');
 const tdk = require('./tdk');
+const banner = require('./banner');
 const ssh = require('./ssh');
 const {auth} = require('./auth');
 
@@ -151,6 +152,36 @@ router.post('/tdk/add', async (ctx, next) => {
 
 router.post('/tdk/upd', async (ctx, next) => {
   const res = await tdk.upd(ctx);
+  ctx.response.type = 'application/json';
+  ctx.response.body = res;
+});
+
+router.get('/banner/findByPage', async (ctx, next) => {
+  const res = await banner.findByPage(ctx);
+  ctx.response.type = 'application/json';
+  ctx.response.body = res;
+});
+
+router.get('/banner/findById', async (ctx, next) => {
+  const res = await banner.findById(ctx);
+  ctx.response.type = 'application/json';
+  ctx.response.body = res;
+});
+
+router.get('/banner/findByPath', async (ctx, next) => {
+  const res = await banner.findByPath(ctx);
+  ctx.response.type = 'application/json';
+  ctx.response.body = res;
+});
+
+router.post('/banner/add', async (ctx, next) => {
+  const res = await banner.add(ctx);
+  ctx.response.type = 'application/json';
+  ctx.response.body = res;
+});
+
+router.post('/banner/upd', async (ctx, next) => {
+  const res = await banner.upd(ctx);
   ctx.response.type = 'application/json';
   ctx.response.body = res;
 });

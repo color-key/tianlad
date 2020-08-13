@@ -1,7 +1,6 @@
 import React from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import Table from './table';
-import Search from './search';
+import Banner from './banner';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -11,16 +10,10 @@ const useStyles = makeStyles(() => ({
 
 export default () => {
   const classes = useStyles();
-  const [state, setState] = React.useState<SearchStateType>({searchText: ''});
-
-  const handleSearch = (searchState: SearchStateType) => {
-    setState(searchState);
-  }
 
   return (
     <div className={classes.root}>
-      <Search onSearch={handleSearch}/>
-      <Table search={state}/>
+      <Banner/>
     </div>
   )
 }
@@ -29,11 +22,9 @@ export interface SearchStateType {
   searchText: string
 }
 
-export interface TdkType{
+export interface BannerType{
   id: number
-  title: string
-  description: string
-  keywords: number,
+  banner: string
   createTime: string,
   updateTime: string,
   path: string,

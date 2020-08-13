@@ -11,7 +11,7 @@ import {Editor} from '@fay-react/material/richText';
 import {postJson, getJson} from '@fay-react/lib/fetch';
 import {getQueryString} from '@fay-react/lib/router';
 import {BASE_URL} from '@/env';
-import ImageUpload from './image-upload';
+import ImageUpload from '@/components/image-upload';
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

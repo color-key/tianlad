@@ -19,6 +19,7 @@ import {PATH_PREFIX} from '@/env';
 // import UpdateIcon from '@material-ui/icons/Update';
 import TitleIcon from '@material-ui/icons/Title';
 import BookIcon from '@material-ui/icons/Book';
+import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -112,7 +113,7 @@ const navData = [{
   text: 'TDK管理',
   path: '/tdk'
 },{
-  icon: TitleIcon,
+  icon: ViewCarouselIcon,
   text: 'Banner管理',
   path: '/banner'
 // },{
